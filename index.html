@@ -6,29 +6,93 @@
 <title>Swoz Sorgu Paneli</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif;}
-body{background:radial-gradient(circle,#650000,#050000);color:white;min-height:100vh;display:flex;justify-content:center;align-items:center;}
-.panel{background:#150000;padding:40px;border-radius:20px;border:2px solid red;box-shadow:0 0 30px red;text-align:center;max-width:400px;width:90%;}
-h1{color:red;margin-bottom:10px;font-size:32px;}
-input{width:100%;padding:14px;margin:8px 0;border-radius:10px;background:#000;border:1px solid red;color:white;font-size:16px;}
-button{width:100%;padding:14px;background:red;color:white;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-size:16px;}
+body{background:radial-gradient(circle,#650000,#050000);color:white;min-height:100vh;}
+#login{position:fixed;inset:0;background:#050000;display:flex;justify-content:center;align-items:center;z-index:10;}
+.box{width:90%;max-width:400px;background:#150000;padding:30px;border-radius:20px;border:2px solid red;box-shadow:0 0 30px red;text-align:center;}
+input,button{width:100%;padding:14px;margin:8px 0;border-radius:10px;}
+input{background:#000;border:1px solid red;color:white;}
+button{background:red;color:white;border:none;font-weight:bold;cursor:pointer;}
 button:hover{background:#cc0000;}
-#mesaj{margin-top:15px;color:#ff6666;font-size:14px;}
+header{height:70px;background:#120000;border-bottom:1px solid red;display:flex;align-items:center;justify-content:space-between;padding:0 20px;}
+.logo{font-size:24px;font-weight:bold;color:red;}
+.menu{font-size:30px;cursor:pointer;}
+#panel{display:none;}
+main{padding:20px;}
+.card{background:#180000;border:1px solid red;border-radius:15px;padding:20px;margin:15px 0;}
+#menuBox{position:fixed;right:-350px;top:80px;width:320px;height:80%;background:#160000;border:2px solid red;border-radius:20px 0 0 20px;padding:20px;transition:.4s;overflow:auto;}
+#menuBox.open{right:0;}
+.item{padding:15px;background:#250000;border:1px solid red;border-radius:12px;margin:10px 0;cursor:pointer;}
+.item:hover{background:#350000;}
+.result{background:black;border:1px solid red;border-radius:15px;padding:15px;margin-top:20px;}
+@media(max-width:600px){.logo{font-size:18px;}}
 </style>
 </head>
 <body>
-<div class="panel">
+
+<div id="login">
+<div class="box">
 <h1>🌐 Swoz Sorgu</h1>
-<p style="margin-bottom:15px;color:#cccccc;">Sorgu Panel</p>
+<p>Sorgu Panel</p>
 <input id="userInput" placeholder="Kullanıcı adı">
+<input id="emailInput" placeholder="Gmail E-posta">
 <input id="passInput" type="password" placeholder="Şifre">
-<button onclick="giris()">Giriş</button>
-<div id="mesaj"></div>
+<button onclick="login()">Giriş</button>
 </div>
+</div>
+
+<div id="panel">
+<header>
+<div class="logo">Swoz Sorgu Paneli</div>
+<div class="menu" onclick="menu()">☰</div>
+</header>
+<main>
+<div class="card">
+<h2>Hoşgeldin yarram <span id="name"></span></h2>
+<p>Sorgu sistemi aktif.</p>
+</div>
+<div id="output"></div>
+</main>
+</div>
+
+<div id="menuBox">
+<h2>Sorgular</h2>
+<div class="item" onclick="form('Ad Soyad')">👤 Ad Soyad ful sorgu</div>
+<div class="item" onclick="form('TC')">👬 Sülale sorgu</div>
+<div class="item" onclick="form('TC')">💏 Aile sorgu</div>
+<div class="item" onclick="form('TC')">🪪 Tc pro sorgu</div>
+<div class="item" onclick="form('Gsm')">📱 Gsm sorgu</div>
+<div class="item" onclick="form('TC')">📱 Tc gsm sorgu</div>
+<div class="item" onclick="form('TC')">📍 Adres sorgu</div>
+<div class="item" onclick="form('TC')">🪪 Ehliyet vesika sorgu</div>
+<div class="item" onclick="form('Telefon')">👤 Vesika sorgu</div>
+<div class="item" onclick="form('TC')">💊 İlaç sorgu</div>
+<div class="item" onclick="form('TC')">🏥 Hastane sorgu</div>
+<div class="item" onclick="form('TC')">🏫 Okul sorgu</div>
+<div class="item" onclick="form('kargo no')">📦 Kargo sorgu</div>
+<div class="item" onclick="form('web site URL')">🌑 Ddos web sikici</div>
+<div class="item" onclick="form('diger tıkla')">🗽Diğer chack işlemler</div>
+</div>
+
 <script>
-function giris(){
+function login(){
 let u=document.getElementById("userInput").value;
-if(!u){document.getElementById("mesaj").innerHTML="❌ Kullanıcı adı gir!";return;}
-document.getElementById("mesaj").innerHTML="✅ Hoşgeldin, "+u+"! 🚀";
+if(!u){alert("Kullanıcı adı gir");return;}
+document.getElementById("name").innerHTML=u;
+document.getElementById("login").style.display="none";
+document.getElementById("panel").style.display="block";
+}
+
+function menu(){
+document.getElementById("menuBox").classList.toggle("open");
+}
+
+function form(tip){
+document.getElementById("output").innerHTML = `
+<div class="result">
+<b>${tip}</b> sorgusu çalıştırıldı.<br>
+<small>(Bu bir demo görüntüsüdür)</small>
+</div>`;
+document.getElementById("menuBox").classList.remove("open");
 }
 </script>
 </body>
