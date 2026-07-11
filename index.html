@@ -10,8 +10,8 @@ body{background:radial-gradient(circle,#650000,#050000);color:white;min-height:1
 #login{position:fixed;inset:0;background:#050000;display:flex;justify-content:center;align-items:center;z-index:10;}
 .box{width:90%;max-width:400px;background:#150000;padding:30px;border-radius:20px;border:2px solid red;box-shadow:0 0 30px red;text-align:center;}
 input,button{width:100%;padding:14px;margin:8px 0;border-radius:10px;}
-input{background:#000;border:1px solid red;color:white;}
-button{background:red;color:white;border:none;font-weight:bold;cursor:pointer;}
+input{background:#000;border:1px solid red;color:white;font-size:16px;}
+button{background:red;color:white;border:none;font-weight:bold;cursor:pointer;font-size:16px;}
 button:hover{background:#cc0000;}
 header{height:70px;background:#120000;border-bottom:1px solid red;display:flex;align-items:center;justify-content:space-between;padding:0 20px;}
 .logo{font-size:24px;font-weight:bold;color:red;}
@@ -24,8 +24,8 @@ main{padding:20px;}
 .item{padding:15px;background:#250000;border:1px solid red;border-radius:12px;margin:10px 0;cursor:pointer;text-align:left;}
 .item:hover{background:#350000;}
 .result{background:black;border:1px solid red;border-radius:15px;padding:15px;margin-top:20px;text-align:left;}
-.sorgu-input{background:#000;border:1px solid red;color:white;padding:12px;border-radius:10px;width:100%;margin:8px 0;}
-.sorgu-button{background:red;color:white;border:none;padding:12px;border-radius:10px;cursor:pointer;font-weight:bold;width:100%;}
+.sorgu-input{background:#000;border:1px solid red;color:white;padding:12px;border-radius:10px;width:100%;margin:8px 0;font-size:16px;}
+.sorgu-button{background:red;color:white;border:none;padding:12px;border-radius:10px;cursor:pointer;font-weight:bold;width:100%;font-size:16px;}
 .sorgu-button:hover{background:#cc0000;}
 @media(max-width:600px){.logo{font-size:18px;}}
 </style>
@@ -75,13 +75,12 @@ main{padding:20px;}
 </div>
 
 <script>
-
-// ========== VERİTABANI (ÖRNEK KİŞİLER) ==========
+// ========== VERİTABANI ==========
 const veritabani = [
-    { ad: 'Muhammed Ali', soyad: 'Kızıl', tc: '12345678901', adres: 'Kadıköy/İstanbul', telefon: '5324567890', ehliyet: 'AB1234', aile: 'Çekirdek Aile', sulale: 'Karaosmanoğlu', ilac: 'Parol', hastane: 'Acıbadem Hastanesi', okul: 'Boğaziçi Üniversitesi', kargo: 'Aras Kargo #TR123' },
-    { ad: 'Ali', soyad: 'Yılmaz', tc: '98765432109', adres: 'Çankaya/Ankara', telefon: '5331234567', ehliyet: 'CD5678', aile: 'Geniş Aile', sulale: 'Köroğlu', ilac: 'Aspirin', hastane: 'Hacettepe Hastanesi', okul: 'ODTÜ', kargo: 'MNG Kargo #TR456' },
-    { ad: 'Ayşe', soyad: 'Kaya', tc: '45678912345', adres: 'Konak/İzmir', telefon: '5357891234', ehliyet: 'EF9012', aile: 'Tek Ebeveynli', sulale: 'Yıldırım', ilac: 'Augmentin', hastane: 'Ege Üniversitesi Hastanesi', okul: 'Ege Üniversitesi', kargo: 'Yurtiçi Kargo #TR789' },
-    { ad: 'Mehmet', soyad: 'Demir', tc: '78912345678', adres: 'Osmangazi/Bursa', telefon: '5364567891', ehliyet: 'GH3456', aile: 'Çocuksuz Aile', sulale: 'Demircioğlu', ilac: 'Vermidon', hastane: 'Uludağ Hastanesi', okul: 'Uludağ Üniversitesi', kargo: 'Ptt Kargo #TR321' }
+    { ad: 'Muhammed Ali', soyad: 'Kızıl', tc: '12345678901', adres: 'Kadıköy/İstanbul', telefon: '5324567890', ehliyet: 'AB1234', aile: 'Çekirdek Aile', sulale: 'Karaosmanoğlu', ilac: 'Parol', hastane: 'Acıbadem Hastanesi', okul: 'Boğaziçi Üniversitesi', kargo: 'ARAS123' },
+    { ad: 'Ali', soyad: 'Yılmaz', tc: '98765432109', adres: 'Çankaya/Ankara', telefon: '5331234567', ehliyet: 'CD5678', aile: 'Geniş Aile', sulale: 'Köroğlu', ilac: 'Aspirin', hastane: 'Hacettepe Hastanesi', okul: 'ODTÜ', kargo: 'MNG456' },
+    { ad: 'Ayşe', soyad: 'Kaya', tc: '45678912345', adres: 'Konak/İzmir', telefon: '5357891234', ehliyet: 'EF9012', aile: 'Tek Ebeveynli', sulale: 'Yıldırım', ilac: 'Augmentin', hastane: 'Ege Üniversitesi Hastanesi', okul: 'Ege Üniversitesi', kargo: 'YURT789' },
+    { ad: 'Mehmet', soyad: 'Demir', tc: '78912345678', adres: 'Osmangazi/Bursa', telefon: '5364567891', ehliyet: 'GH3456', aile: 'Çocuksuz Aile', sulale: 'Demircioğlu', ilac: 'Vermidon', hastane: 'Uludağ Hastanesi', okul: 'Uludağ Üniversitesi', kargo: 'PTT321' }
 ];
 
 // ========== GİRİŞ ==========
@@ -98,7 +97,7 @@ function menu(){
 document.getElementById("menuBox").classList.toggle("open");
 }
 
-// ========== SORGU AÇ (INPUT GÖSTER) ==========
+// ========== SORGU AÇ ==========
 function sorguAc(tip) {
     const output = document.getElementById("output");
     document.getElementById("menuBox").classList.remove("open");
@@ -106,79 +105,53 @@ function sorguAc(tip) {
     let html = `<div class="result"><b>🔍 ${tip} Sorgusu</b><hr style="border-color:red;margin:10px 0;">`;
     
     if (tip === 'Ad Soyad') {
-        html += `
-            <input class="sorgu-input" id="adInput" placeholder="Ad girin...">
+        html += `<input class="sorgu-input" id="adInput" placeholder="Ad girin...">
             <input class="sorgu-input" id="soyadInput" placeholder="Soyad girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Ad Soyad')">🔍 Sorgula</button>
-        `;
+            <button class="sorgu-button" onclick="sorguCalistir('Ad Soyad')">🔍 Sorgula</button>`;
     } else if (tip === 'TC') {
-        html += `
-            <input class="sorgu-input" id="tcInput" placeholder="TC girin (11 haneli)...">
-            <button class="sorgu-button" onclick="sorguCalistir('TC')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="tcInput" placeholder="TC girin (11 haneli)...">
+            <button class="sorgu-button" onclick="sorguCalistir('TC')">🔍 Sorgula</button>`;
     } else if (tip === 'Adres') {
-        html += `
-            <input class="sorgu-input" id="ilInput" placeholder="İl girin...">
+        html += `<input class="sorgu-input" id="ilInput" placeholder="İl girin...">
             <input class="sorgu-input" id="ilceInput" placeholder="İlçe girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Adres')">🔍 Sorgula</button>
-        `;
+            <button class="sorgu-button" onclick="sorguCalistir('Adres')">🔍 Sorgula</button>`;
     } else if (tip === 'Telefon') {
-        html += `
-            <input class="sorgu-input" id="telInput" placeholder="Telefon girin (10 haneli)...">
-            <button class="sorgu-button" onclick="sorguCalistir('Telefon')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="telInput" placeholder="Telefon girin (10 haneli)...">
+            <button class="sorgu-button" onclick="sorguCalistir('Telefon')">🔍 Sorgula</button>`;
     } else if (tip === 'Ehliyet') {
-        html += `
-            <input class="sorgu-input" id="ehliyetInput" placeholder="Ehliyet no girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Ehliyet')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="ehliyetInput" placeholder="Ehliyet no girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Ehliyet')">🔍 Sorgula</button>`;
     } else if (tip === 'Aile') {
-        html += `
-            <input class="sorgu-input" id="aileInput" placeholder="Aile adı girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Aile')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="aileInput" placeholder="Aile adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Aile')">🔍 Sorgula</button>`;
     } else if (tip === 'Sülale') {
-        html += `
-            <input class="sorgu-input" id="sulaleInput" placeholder="Sülale adı girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Sülale')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="sulaleInput" placeholder="Sülale adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Sülale')">🔍 Sorgula</button>`;
     } else if (tip === 'İlaç') {
-        html += `
-            <input class="sorgu-input" id="ilacInput" placeholder="İlaç adı girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('İlaç')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="ilacInput" placeholder="İlaç adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('İlaç')">🔍 Sorgula</button>`;
     } else if (tip === 'Hastane') {
-        html += `
-            <input class="sorgu-input" id="hastaneInput" placeholder="Hastane adı girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Hastane')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="hastaneInput" placeholder="Hastane adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Hastane')">🔍 Sorgula</button>`;
     } else if (tip === 'Okul') {
-        html += `
-            <input class="sorgu-input" id="okulInput" placeholder="Okul adı girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Okul')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="okulInput" placeholder="Okul adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Okul')">🔍 Sorgula</button>`;
     } else if (tip === 'Kargo') {
-        html += `
-            <input class="sorgu-input" id="kargoInput" placeholder="Kargo takip no girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Kargo')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="kargoInput" placeholder="Kargo takip no girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Kargo')">🔍 Sorgula</button>`;
     } else if (tip === 'DDoS') {
-        html += `
-            <input class="sorgu-input" id="ddosInput" placeholder="Hedef URL girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('DDoS')">⚠️ Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="ddosInput" placeholder="Hedef URL girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('DDoS')">⚠️ Sorgula</button>`;
     } else if (tip === 'Diğer') {
-        html += `
-            <input class="sorgu-input" id="digerInput" placeholder="Bilgi girin...">
-            <button class="sorgu-button" onclick="sorguCalistir('Diğer')">🔍 Sorgula</button>
-        `;
+        html += `<input class="sorgu-input" id="digerInput" placeholder="Bilgi girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Diğer')">🔍 Sorgula</button>`;
     }
     
     html += `</div>`;
     output.innerHTML = html;
 }
 
-// ========== SORGU ÇALIŞTIR (VERİTABANINDA ARA) ==========
+// ========== SORGU ÇALIŞTIR ==========
 function sorguCalistir(tip) {
     const output = document.getElementById("output");
     let sonuc = `<div class="result"><b>🔍 ${tip} Sorgusu Sonucu</b><hr style="border-color:red;margin:10px 0;">`;
@@ -188,198 +161,120 @@ function sorguCalistir(tip) {
         const ad = document.getElementById("adInput").value.toLowerCase().trim();
         const soyad = document.getElementById("soyadInput").value.toLowerCase().trim();
         if (!ad || !soyad) { alert("Ad ve soyad girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.ad.toLowerCase() === ad && kisi.soyad.toLowerCase() === soyad) {
-                sonuc += `✅ Kişi bulundu!<br><br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}<br>`;
-                sonuc += `📱 Telefon: ${kisi.telefon}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Kişi bulundu!<br><br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📍 Adres: ${kisi.adres}<br>📱 Telefon: ${kisi.telefon}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${ad} ${soyad}" bulunamadı!`;
-        
     } else if (tip === 'TC') {
         const tc = document.getElementById("tcInput").value.trim();
         if (!tc || tc.length !== 11) { alert("11 haneli TC girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.tc === tc) {
-                sonuc += `✅ TC bulundu!<br><br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}<br>`;
-                sonuc += `📱 Telefon: ${kisi.telefon}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ TC bulundu!<br><br>🪪 TC: ${kisi.tc}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>📍 Adres: ${kisi.adres}<br>📱 Telefon: ${kisi.telefon}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${tc}" TC'si bulunamadı!`;
-        
     } else if (tip === 'Adres') {
         const il = document.getElementById("ilInput").value.toLowerCase().trim();
         const ilce = document.getElementById("ilceInput").value.toLowerCase().trim();
         if (!il || !ilce) { alert("İl ve ilçe girin!"); return; }
-        
         for (let kisi of veritabani) {
             const adresParts = kisi.adres.toLowerCase().split('/');
             if (adresParts[0] === il && adresParts[1] === ilce) {
-                sonuc += `✅ Adres bulundu!<br><br>`;
-                sonuc += `📍 Adres: ${kisi.adres}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📱 Telefon: ${kisi.telefon}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Adres bulundu!<br><br>📍 Adres: ${kisi.adres}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📱 Telefon: ${kisi.telefon}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${il}/${ilce}" adresi bulunamadı!`;
-        
     } else if (tip === 'Telefon') {
         const tel = document.getElementById("telInput").value.trim();
         if (!tel || tel.length < 10) { alert("Geçerli telefon girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.telefon === tel) {
-                sonuc += `✅ Telefon bulundu!<br><br>`;
-                sonuc += `📱 Telefon: ${kisi.telefon}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Telefon bulundu!<br><br>📱 Telefon: ${kisi.telefon}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📍 Adres: ${kisi.adres}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${tel}" telefonu bulunamadı!`;
-        
     } else if (tip === 'Ehliyet') {
         const ehliyet = document.getElementById("ehliyetInput").value.trim().toUpperCase();
         if (!ehliyet) { alert("Ehliyet no girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.ehliyet === ehliyet) {
-                sonuc += `✅ Ehliyet bulundu!<br><br>`;
-                sonuc += `🪪 Ehliyet: ${kisi.ehliyet}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Ehliyet bulundu!<br><br>🪪 Ehliyet: ${kisi.ehliyet}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📍 Adres: ${kisi.adres}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${ehliyet}" ehliyeti bulunamadı!`;
-        
     } else if (tip === 'Aile') {
         const aile = document.getElementById("aileInput").value.toLowerCase().trim();
         if (!aile) { alert("Aile adı girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.aile.toLowerCase() === aile) {
-                sonuc += `✅ Aile bulundu!<br><br>`;
-                sonuc += `💏 Aile: ${kisi.aile}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Aile bulundu!<br><br>💏 Aile: ${kisi.aile}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📍 Adres: ${kisi.adres}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${aile}" ailesi bulunamadı!`;
-        
     } else if (tip === 'Sülale') {
         const sulale = document.getElementById("sulaleInput").value.toLowerCase().trim();
         if (!sulale) { alert("Sülale adı girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.sulale.toLowerCase() === sulale) {
-                sonuc += `✅ Sülale bulundu!<br><br>`;
-                sonuc += `👬 Sülale: ${kisi.sulale}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Sülale bulundu!<br><br>👬 Sülale: ${kisi.sulale}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📍 Adres: ${kisi.adres}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${sulale}" sülalesi bulunamadı!`;
-        
     } else if (tip === 'İlaç') {
         const ilac = document.getElementById("ilacInput").value.toLowerCase().trim();
         if (!ilac) { alert("İlaç adı girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.ilac.toLowerCase() === ilac) {
-                sonuc += `✅ İlaç bulundu!<br><br>`;
-                sonuc += `💊 İlaç: ${kisi.ilac}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ İlaç bulundu!<br><br>💊 İlaç: ${kisi.ilac}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📍 Adres: ${kisi.adres}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${ilac}" ilacı bulunamadı!`;
-        
     } else if (tip === 'Hastane') {
         const hastane = document.getElementById("hastaneInput").value.toLowerCase().trim();
         if (!hastane) { alert("Hastane adı girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.hastane.toLowerCase() === hastane) {
-                sonuc += `✅ Hastane bulundu!<br><br>`;
-                sonuc += `🏥 Hastane: ${kisi.hastane}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Hastane bulundu!<br><br>🏥 Hastane: ${kisi.hastane}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📍 Adres: ${kisi.adres}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${hastane}" hastanesi bulunamadı!`;
-        
     } else if (tip === 'Okul') {
         const okul = document.getElementById("okulInput").value.toLowerCase().trim();
         if (!okul) { alert("Okul adı girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.okul.toLowerCase() === okul) {
-                sonuc += `✅ Okul bulundu!<br><br>`;
-                sonuc += `🏫 Okul: ${kisi.okul}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `🪪 TC: ${kisi.tc}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Okul bulundu!<br><br>🏫 Okul: ${kisi.okul}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>🪪 TC: ${kisi.tc}<br>📍 Adres: ${kisi.adres}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${okul}" okulu bulunamadı!`;
-        
     } else if (tip === 'Kargo') {
         const kargo = document.getElementById("kargoInput").value.trim().toUpperCase();
         if (!kargo) { alert("Kargo takip no girin!"); return; }
-        
         for (let kisi of veritabani) {
             if (kisi.kargo.toUpperCase() === kargo) {
-                sonuc += `✅ Kargo bulundu!<br><br>`;
-                sonuc += `📦 Kargo: ${kisi.kargo}<br>`;
-                sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-                sonuc += `📍 Adres: ${kisi.adres}`;
-                bulundu = true;
-                break;
+                sonuc += `✅ Kargo bulundu!<br><br>📦 Kargo: ${kisi.kargo}<br>👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>📍 Adres: ${kisi.adres}`;
+                bulundu = true; break;
             }
         }
         if (!bulundu) sonuc += `❌ "${kargo}" kargosu bulunamadı!`;
-        
     } else if (tip === 'DDoS') {
         const url = document.getElementById("ddosInput").value.trim();
         if (!url) { alert("Hedef URL girin!"); return; }
-        sonuc += `⚠️ DDoS Saldırısı simüle ediliyor: ${url}<br>`;
-        sonuc += `❌ Bu sadece bir demodur! Gerçek saldırı yapılmaz.`;
+        sonuc += `⚠️ DDoS Saldırısı simüle ediliyor: ${url}<br>❌ Bu sadece bir demodur! Gerçek saldırı yapılmaz.`;
         bulundu = true;
-        
     } else if (tip === 'Diğer') {
         const diger = document.getElementById("digerInput").value.trim();
         if (!diger) { alert("Bilgi girin!"); return; }
@@ -391,7 +286,6 @@ function sorguCalistir(tip) {
     sonuc += `</div>`;
     output.innerHTML = sonuc;
 }
-
 </script>
 </body>
 </html>
