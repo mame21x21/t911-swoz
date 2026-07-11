@@ -3,140 +3,556 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swoz Sorgu Paneli</title>
+
+<title>Swoz.Check Demo</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif;}
-body{background:radial-gradient(circle,#650000,#050000);color:white;min-height:100vh;}
-#login{position:fixed;inset:0;background:#050000;display:flex;justify-content:center;align-items:center;z-index:10;}
-.box{width:90%;max-width:400px;background:#150000;padding:30px;border-radius:20px;border:2px solid red;box-shadow:0 0 30px red;text-align:center;}
-input,button{width:100%;padding:14px;margin:8px 0;border-radius:10px;}
-input{background:#000;border:1px solid red;color:white;}
-button{background:red;color:white;border:none;font-weight:bold;cursor:pointer;}
-button:hover{background:#cc0000;}
-header{height:70px;background:#120000;border-bottom:1px solid red;display:flex;align-items:center;justify-content:space-between;padding:0 20px;}
-.logo{font-size:24px;font-weight:bold;color:red;}
-.menu{font-size:30px;cursor:pointer;}
-#panel{display:none;}
-main{padding:20px;}
-.card{background:#180000;border:1px solid red;border-radius:15px;padding:20px;margin:15px 0;}
-#menuBox{position:fixed;right:-350px;top:80px;width:320px;height:80%;background:#160000;border:2px solid red;border-radius:20px 0 0 20px;padding:20px;transition:.4s;overflow:auto;}
-#menuBox.open{right:0;}
-.item{padding:15px;background:#250000;border:1px solid red;border-radius:12px;margin:10px 0;cursor:pointer;text-align:left;}
-.item:hover{background:#350000;}
-.result{background:black;border:1px solid red;border-radius:15px;padding:15px;margin-top:20px;text-align:left;}
-#loading{color:yellow;margin-top:10px;display:none;}
-@media(max-width:600px){.logo{font-size:18px;}}
-</style>
-</head>
-<body>
 
-<div id="login">
-<div class="box">
-<h1>🌐 Swoz Sorgu</h1>
-<p>Sorgu Paneli</p>
-<input id="userInput" placeholder="Kullanıcı adı">
-<input id="emailInput" placeholder="E-posta">
-<input id="passInput" type="password" placeholder="Şifre">
-<button onclick="login()">Giriş</button>
-</div>
-</div>
-
-<div id="panel">
-<header>
-<div class="logo">Swoz Sorgu Paneli</div>
-<div class="menu" onclick="menu()">☰</div>
-</header>
-<main>
-<div class="card">
-<h2>Hoşgeldin yarram <span id="name"></span></h2>
-<p>Sorgu sistemi aktif.</p>
-</div>
-<div id="output"></div>
-<div id="loading">⏳ API'den veri çekiliyor...</div>
-</main>
-</div>
-
-<div id="menuBox">
-<h2 style="color:red;text-align:center;">Sorgular</h2>
-<div class="item" onclick="sorgu('Ad Soyad')">👤 Ad Soyad</div>
-<div class="item" onclick="sorgu('TC')">🪪 TC Numarası</div>
-<div class="item" onclick="sorgu('Adres')">📍 Adres</div>
-<div class="item" onclick="sorgu('GSM')">📱 Telefon</div>
-</div>
-
-<script>
-// 🌐 RANDOMUSER.ME API'DEN VERİ ÇEK
-async function apiSorgu() {
-    const loading = document.getElementById("loading");
-    loading.style.display = "block";
-    loading.innerHTML = "⏳ API'den veri çekiliyor...";
-    
-    try {
-        const response = await fetch('https://randomuser.me/api/');
-        const data = await response.json();
-        const kisi = data.results[0];
-        
-        loading.style.display = "none";
-        return {
-            ad: kisi.name.first,
-            soyad: kisi.name.last,
-            adres: `${kisi.location.city}/${kisi.location.country}`,
-            telefon: kisi.phone,
-            tc: "***********"
-        };
-    } catch (error) {
-        loading.innerHTML = "❌ API hatası!";
-        return null;
-    }
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
 }
 
-// 🔍 Sorgu fonksiyonu
-async function sorgu(tip) {
-    const output = document.getElementById("output");
-    output.innerHTML = `<div class="result">⏳ Veri yükleniyor...</div>`;
-    
-    const kisi = await apiSorgu();
-    if (!kisi) {
-        output.innerHTML = `<div class="result">❌ Veri çekilemedi, tekrar dene!</div>`;
-        return;
-    }
-    
-    let sonuc = `<div class="result"><b>🔍 ${tip} Sorgusu</b><br><hr style="border-color:red;margin:10px 0;">`;
+body{
+background:
+radial-gradient(circle,#650000,#050000);
+color:white;
+min-height:100vh;
+}
 
+
+#login{
+position:fixed;
+inset:0;
+background:#050000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:10;
+}
+
+
+.box{
+width:90%;
+max-width:400px;
+background:#150000;
+padding:30px;
+border-radius:20px;
+border:2px solid red;
+box-shadow:0 0 30px red;
+text-align:center;
+}
+
+
+input,button{
+
+width:100%;
+padding:14px;
+margin:8px 0;
+border-radius:10px;
+
+}
+
+
+input{
+
+background:#000;
+border:1px solid red;
+color:white;
+
+}
+
+
+button{
+
+background:red;
+color:white;
+border:none;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+
+
+header{
+
+height:70px;
+background:#120000;
+border-bottom:1px solid red;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+
+}
+
+
+.logo{
+
+font-size:24px;
+font-weight:bold;
+color:red;
+
+}
+
+
+.menu{
+
+font-size:30px;
+cursor:pointer;
+
+}
+
+
+
+#panel{
+
+display:none;
+
+}
+
+
+
+main{
+
+padding:20px;
+
+}
+
+
+.card{
+
+background:#180000;
+border:1px solid red;
+border-radius:15px;
+padding:20px;
+margin:15px 0;
+
+}
+
+
+#menuBox{
+
+position:fixed;
+right:-350px;
+top:80px;
+width:320px;
+height:80%;
+background:#160000;
+border:2px solid red;
+border-radius:20px 0 0 20px;
+padding:20px;
+transition:.4s;
+overflow:auto;
+
+}
+
+
+#menuBox.open{
+
+right:0;
+
+}
+
+
+.item{
+
+padding:15px;
+background:#250000;
+border:1px solid red;
+border-radius:12px;
+margin:10px 0;
+cursor:pointer;
+
+}
+
+
+.result{
+
+background:black;
+border:1px solid red;
+border-radius:15px;
+padding:15px;
+margin-top:20px;
+
+}
+
+.sorgu-input{
+background:#000;
+border:1px solid red;
+color:white;
+padding:12px;
+border-radius:10px;
+width:100%;
+margin:8px 0;
+}
+
+.sorgu-button{
+background:red;
+color:white;
+border:none;
+padding:12px;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+width:100%;
+}
+
+.sorgu-button:hover{
+background:#cc0000;
+}
+
+@media(max-width:600px){
+
+.logo{
+font-size:18px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div id="login">
+
+<div class="box">
+
+<h1>🌐𝐒𝐰𝐨𝐳 𝐒𝐨𝐫𝐠𝐮</h1>
+
+<p>Sorgu Panel</p>
+
+<input id="userInput" placeholder="Kullanıcı adı">
+
+<input id="userInput" placeholder="Gmail E-posta">
+
+<input id="passInput" type="password" placeholder="Şifre">
+
+
+<button onclick="login()">
+Giriş
+</button>
+
+</div>
+
+</div>
+
+
+<div id="panel">
+
+<header>
+
+<div class="logo">
+𝐒𝐰𝐨𝐳 𝐒𝐨𝐫𝐠𝐮 𝐏𝐚𝐧𝐞𝐥
+</div>
+
+
+<div class="menu"
+onclick="menu()">
+☰
+</div>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>
+Hoşgeldin yarram <span id="name"></span>
+</h2>
+
+<p>
+ sorgu sistemi aktif.
+</p>
+
+</div>
+
+
+<div id="output"></div>
+
+
+</main>
+
+
+</div>
+
+
+
+<div id="menuBox">
+
+<h2>Sorgular</h2>
+
+
+<div class="item" onclick="sorguAc('Ad Soyad')">
+👤 Ad Soyad ful sorgu 
+</div>
+
+<div class="item" onclick="sorguAc('Sülale')">
+👬 Sülale sorgu
+</div>
+
+<div class="item" onclick="sorguAc('Aile')">
+💏 Aile sorgu
+</div>
+
+<div class="item" onclick="sorguAc('TC')">
+🪪 Tc pro sorgu 
+</div>
+
+<div class="item" onclick="sorguAc('GSM')">
+📱 Gsm sorgu 
+</div>
+
+<div class="item" onclick="sorguAc('TC GSM')">
+📱 Tc gsm sorgu
+</div>
+
+<div class="item" onclick="sorguAc('Adres')">
+📍 Adres sorgu 
+</div>
+
+<div class="item" onclick="sorguAc('Ehliyet')">
+🪪 Ehliyet vesika sorgu
+</div>
+
+<div class="item" onclick="sorguAc('Telefon')">
+👤 vesika sorgu 
+</div>
+
+<div class="item" onclick="sorguAc('İlaç')">
+💊 İlaç sorgu
+</div>
+
+<div class="item" onclick="sorguAc('Hastane')">
+🏥 Hastane sorgu
+</div>
+
+<div class="item" onclick="sorguAc('Okul')">
+🏫 Okul sorgu
+</div>
+
+<div class="item" onclick="sorguAc('Kargo')">
+📦 Kargo sorgu
+</div>
+
+<div class="item" onclick="sorguAc('DDoS')">
+🌑 Ddos web sikici
+</div>
+
+<div class="item" onclick="sorguAc('Diğer')">
+🗽Diğer chack işlemler
+</div>
+
+
+</div>
+
+
+
+<script>
+
+// ========== GİRİŞ ==========
+function login(){
+
+let u=document.getElementById("userInput").value;
+
+if(!u){
+alert("Kullanıcı adı gir");
+return;
+}
+
+document.getElementById("name").innerHTML=u;
+document.getElementById("login").style.display="none";
+document.getElementById("panel").style.display="block";
+
+}
+
+// ========== MENÜ ==========
+function menu(){
+document.getElementById("menuBox").classList.toggle("open");
+}
+
+// ========== SORGU AÇ (INPUT GÖSTER) ==========
+function sorguAc(tip) {
+    const output = document.getElementById("output");
+    document.getElementById("menuBox").classList.remove("open");
+    
+    let html = `<div class="result"><b>🔍 ${tip} Sorgusu</b><br><hr style="border-color:red;margin:10px 0;">`;
+    
     if (tip === 'Ad Soyad') {
-        sonuc += `👤 Ad Soyad: ${kisi.ad} ${kisi.soyad}<br>`;
-        sonuc += `🌍 Ülke: ${kisi.adres.split('/')[1] || "?"}`;
+        html += `
+            <input class="sorgu-input" id="adInput" placeholder="Ad girin...">
+            <input class="sorgu-input" id="soyadInput" placeholder="Soyad girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Ad Soyad')">🔍 Sorgula</button>
+        `;
     } else if (tip === 'TC') {
-        sonuc += `🪪 TC: ${kisi.tc}<br>`;
-        sonuc += `👤 ${kisi.ad} ${kisi.soyad}`;
+        html += `
+            <input class="sorgu-input" id="tcInput" placeholder="TC numarası girin (11 haneli)...">
+            <button class="sorgu-button" onclick="sorguCalistir('TC')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'TC GSM') {
+        html += `
+            <input class="sorgu-input" id="tcGsmInput" placeholder="TC numarası girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('TC GSM')">🔍 Sorgula</button>
+        `;
     } else if (tip === 'Adres') {
-        sonuc += `📍 Adres: ${kisi.adres}<br>`;
-        sonuc += `👤 ${kisi.ad} ${kisi.soyad}`;
-    } else if (tip === 'GSM') {
-        sonuc += `📱 Telefon: ${kisi.telefon}<br>`;
-        sonuc += `👤 ${kisi.ad} ${kisi.soyad}`;
+        html += `
+            <input class="sorgu-input" id="ilInput" placeholder="İl girin...">
+            <input class="sorgu-input" id="ilceInput" placeholder="İlçe girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Adres')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'GSM' || tip === 'Telefon') {
+        html += `
+            <input class="sorgu-input" id="telInput" placeholder="Telefon numarası girin (10 haneli)...">
+            <button class="sorgu-button" onclick="sorguCalistir('Telefon')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'Ehliyet') {
+        html += `
+            <input class="sorgu-input" id="ehliyetInput" placeholder="Ehliyet no girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Ehliyet')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'Aile') {
+        html += `
+            <input class="sorgu-input" id="aileInput" placeholder="Aile adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Aile')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'Sülale') {
+        html += `
+            <input class="sorgu-input" id="sulaleInput" placeholder="Sülale adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Sülale')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'İlaç') {
+        html += `
+            <input class="sorgu-input" id="ilacInput" placeholder="İlaç adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('İlaç')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'Hastane') {
+        html += `
+            <input class="sorgu-input" id="hastaneInput" placeholder="Hastane adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Hastane')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'Okul') {
+        html += `
+            <input class="sorgu-input" id="okulInput" placeholder="Okul adı girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Okul')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'Kargo') {
+        html += `
+            <input class="sorgu-input" id="kargoInput" placeholder="Kargo takip no girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Kargo')">🔍 Sorgula</button>
+        `;
+    } else if (tip === 'DDoS') {
+        html += `
+            <input class="sorgu-input" id="ddosInput" placeholder="Hedef URL girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('DDoS')">⚠️ Sorgula</button>
+        `;
+    } else {
+        html += `
+            <input class="sorgu-input" id="digerInput" placeholder="Bilgi girin...">
+            <button class="sorgu-button" onclick="sorguCalistir('Diğer')">🔍 Sorgula</button>
+        `;
     }
     
-    sonuc += `<br><hr style="border-color:#333;"><small style="color:#888;">✅ RandomUser.me API • ${new Date().toLocaleString()}</small>`;
+    html += `</div>`;
+    output.innerHTML = html;
+}
+
+// ========== SORGU ÇALIŞTIR ==========
+function sorguCalistir(tip) {
+    const output = document.getElementById("output");
+    let mesaj = "";
+    let deger = "";
+    
+    if (tip === 'Ad Soyad') {
+        const ad = document.getElementById("adInput").value;
+        const soyad = document.getElementById("soyadInput").value;
+        if (!ad || !soyad) { alert("Ad ve soyad girin!"); return; }
+        mesaj = `👤 Ad: ${ad} | Soyad: ${soyad}`;
+        deger = `${ad} ${soyad}`;
+    } else if (tip === 'TC') {
+        const tc = document.getElementById("tcInput").value;
+        if (!tc || tc.length !== 11) { alert("11 haneli TC girin!"); return; }
+        mesaj = `🪪 TC: ${tc}`;
+        deger = tc;
+    } else if (tip === 'TC GSM') {
+        const tc = document.getElementById("tcGsmInput").value;
+        if (!tc || tc.length !== 11) { alert("11 haneli TC girin!"); return; }
+        mesaj = `📱 TC: ${tc} için GSM sorgusu yapılıyor...`;
+        deger = tc;
+    } else if (tip === 'Adres') {
+        const il = document.getElementById("ilInput").value;
+        const ilce = document.getElementById("ilceInput").value;
+        if (!il || !ilce) { alert("İl ve ilçe girin!"); return; }
+        mesaj = `📍 ${il}/${ilce}`;
+        deger = `${il}/${ilce}`;
+    } else if (tip === 'Telefon') {
+        const tel = document.getElementById("telInput").value;
+        if (!tel || tel.length < 10) { alert("Geçerli telefon girin!"); return; }
+        mesaj = `📱 Telefon: ${tel}`;
+        deger = tel;
+    } else if (tip === 'Ehliyet') {
+        const ehliyet = document.getElementById("ehliyetInput").value;
+        if (!ehliyet) { alert("Ehliyet no girin!"); return; }
+        mesaj = `🪪 Ehliyet: ${ehliyet}`;
+        deger = ehliyet;
+    } else if (tip === 'Aile') {
+        const aile = document.getElementById("aileInput").value;
+        if (!aile) { alert("Aile adı girin!"); return; }
+        mesaj = `💏 Aile: ${aile}`;
+        deger = aile;
+    } else if (tip === 'Sülale') {
+        const sulale = document.getElementById("sulaleInput").value;
+        if (!sulale) { alert("Sülale adı girin!"); return; }
+        mesaj = `👬 Sülale: ${sulale}`;
+        deger = sulale;
+    } else if (tip === 'İlaç') {
+        const ilac = document.getElementById("ilacInput").value;
+        if (!ilac) { alert("İlaç adı girin!"); return; }
+        mesaj = `💊 İlaç: ${ilac}`;
+        deger = ilac;
+    } else if (tip === 'Hastane') {
+        const hastane = document.getElementById("hastaneInput").value;
+        if (!hastane) { alert("Hastane adı girin!"); return; }
+        mesaj = `🏥 Hastane: ${hastane}`;
+        deger = hastane;
+    } else if (tip === 'Okul') {
+        const okul = document.getElementById("okulInput").value;
+        if (!okul) { alert("Okul adı girin!"); return; }
+        mesaj = `🏫 Okul: ${okul}`;
+        deger = okul;
+    } else if (tip === 'Kargo') {
+        const kargo = document.getElementById("kargoInput").value;
+        if (!kargo) { alert("Kargo takip no girin!"); return; }
+        mesaj = `📦 Kargo Takip: ${kargo}`;
+        deger = kargo;
+    } else if (tip === 'DDoS') {
+        const url = document.getElementById("ddosInput").value;
+        if (!url) { alert("Hedef URL girin!"); return; }
+        mesaj = `🌑 DDoS Saldırısı: ${url} (Sadece demo!)`;
+        deger = url;
+    } else {
+        const diger = document.getElementById("digerInput").value;
+        if (!diger) { alert("Bilgi girin!"); return; }
+        mesaj = `🗽 ${diger}`;
+        deger = diger;
+    }
+    
+    // Sonucu göster
+    let sonuc = `<div class="result"><b>✅ ${tip} Sorgusu Tamamlandı</b><br><hr style="border-color:green;margin:10px 0;">`;
+    sonuc += `${mesaj}<br>`;
+    sonuc += `<small style="color:#888;">📍 Sorgu tarihi: ${new Date().toLocaleString()}</small>`;
     sonuc += `</div>`;
     
     output.innerHTML = sonuc;
-    document.getElementById("menuBox").classList.remove("open");
 }
 
-// Giriş
-function login() {
-    let u = document.getElementById("userInput").value;
-    if (!u) { alert("Kullanıcı adı gir!"); return; }
-    document.getElementById("name").innerHTML = u;
-    document.getElementById("login").style.display = "none";
-    document.getElementById("panel").style.display = "block";
-}
-
-// Menü
-function menu() {
-    document.getElementById("menuBox").classList.toggle("open");
-}
 </script>
+
 </body>
 </html>
