@@ -1,53 +1,35 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>T911 Swoz</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      text-align: center;
-    }
-
-    .container {
-      margin-top: 120px;
-    }
-
-    h1 {
-      font-size: 50px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 20px;
-      color: #cbd5e1;
-    }
-
-    .btn {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 12px 25px;
-      background: #3b82f6;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-
-    .btn:hover {
-      background: #2563eb;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swoz Sorgu Paneli</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif;}
+body{background:radial-gradient(circle,#650000,#050000);color:white;min-height:100vh;display:flex;justify-content:center;align-items:center;}
+.panel{background:#150000;padding:40px;border-radius:20px;border:2px solid red;box-shadow:0 0 30px red;text-align:center;max-width:400px;width:90%;}
+h1{color:red;margin-bottom:10px;font-size:32px;}
+input{width:100%;padding:14px;margin:8px 0;border-radius:10px;background:#000;border:1px solid red;color:white;font-size:16px;}
+button{width:100%;padding:14px;background:red;color:white;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-size:16px;}
+button:hover{background:#cc0000;}
+#mesaj{margin-top:15px;color:#ff6666;font-size:14px;}
+</style>
 </head>
 <body>
-
-  <div class="container">
-    <h1>T911 Swoz 🚀</h1>
-    <p>Bu benim ilk modern web sitem</p>
-    <a class="btn" href="#">Hakkımda</a>
-  </div>
-
+<div class="panel">
+<h1>🌐 Swoz Sorgu</h1>
+<p style="margin-bottom:15px;color:#cccccc;">Sorgu Panel</p>
+<input id="userInput" placeholder="Kullanıcı adı">
+<input id="passInput" type="password" placeholder="Şifre">
+<button onclick="giris()">Giriş</button>
+<div id="mesaj"></div>
+</div>
+<script>
+function giris(){
+let u=document.getElementById("userInput").value;
+if(!u){document.getElementById("mesaj").innerHTML="❌ Kullanıcı adı gir!";return;}
+document.getElementById("mesaj").innerHTML="✅ Hoşgeldin, "+u+"! 🚀";
+}
+</script>
 </body>
 </html>
