@@ -21,9 +21,9 @@ main{padding:20px;}
 .card{background:#180000;border:1px solid red;border-radius:15px;padding:20px;margin:15px 0;}
 #menuBox{position:fixed;right:-350px;top:80px;width:320px;height:80%;background:#160000;border:2px solid red;border-radius:20px 0 0 20px;padding:20px;transition:.4s;overflow:auto;}
 #menuBox.open{right:0;}
-.item{padding:15px;background:#250000;border:1px solid red;border-radius:12px;margin:10px 0;cursor:pointer;}
+.item{padding:15px;background:#250000;border:1px solid red;border-radius:12px;margin:10px 0;cursor:pointer;text-align:left;}
 .item:hover{background:#350000;}
-.result{background:black;border:1px solid red;border-radius:15px;padding:15px;margin-top:20px;}
+.result{background:black;border:1px solid red;border-radius:15px;padding:15px;margin-top:20px;text-align:left;}
 @media(max-width:600px){.logo{font-size:18px;}}
 </style>
 </head>
@@ -32,9 +32,9 @@ main{padding:20px;}
 <div id="login">
 <div class="box">
 <h1>🌐 Swoz Sorgu</h1>
-<p>Sorgu Panel</p>
+<p>Sorgu Paneli</p>
 <input id="userInput" placeholder="Kullanıcı adı">
-<input id="emailInput" placeholder="Gmail E-posta">
+<input id="emailInput" placeholder="E-posta">
 <input id="passInput" type="password" placeholder="Şifre">
 <button onclick="login()">Giriş</button>
 </div>
@@ -55,22 +55,22 @@ main{padding:20px;}
 </div>
 
 <div id="menuBox">
-<h2>Sorgular</h2>
-<div class="item" onclick="form('Ad Soyad')">👤 Ad Soyad ful sorgu</div>
-<div class="item" onclick="form('TC')">👬 Sülale sorgu</div>
-<div class="item" onclick="form('TC')">💏 Aile sorgu</div>
-<div class="item" onclick="form('TC')">🪪 Tc pro sorgu</div>
-<div class="item" onclick="form('Gsm')">📱 Gsm sorgu</div>
-<div class="item" onclick="form('TC')">📱 Tc gsm sorgu</div>
-<div class="item" onclick="form('TC')">📍 Adres sorgu</div>
-<div class="item" onclick="form('TC')">🪪 Ehliyet vesika sorgu</div>
-<div class="item" onclick="form('Telefon')">👤 Vesika sorgu</div>
-<div class="item" onclick="form('TC')">💊 İlaç sorgu</div>
-<div class="item" onclick="form('TC')">🏥 Hastane sorgu</div>
-<div class="item" onclick="form('TC')">🏫 Okul sorgu</div>
-<div class="item" onclick="form('kargo no')">📦 Kargo sorgu</div>
-<div class="item" onclick="form('web site URL')">🌑 Ddos web sikici</div>
-<div class="item" onclick="form('diger tıkla')">🗽Diğer chack işlemler</div>
+<h2 style="color:red;text-align:center;">Sorgular</h2>
+<div class="item" onclick="form('Ad Soyad Sorgusu')">👤 Ad Soyad</div>
+<div class="item" onclick="form('Sülale Sorgusu')">👬 Sülale</div>
+<div class="item" onclick="form('Aile Sorgusu')">💏 Aile</div>
+<div class="item" onclick="form('TC Pro Sorgusu')">🪪 TC Pro</div>
+<div class="item" onclick="form('GSM Sorgusu')">📱 GSM</div>
+<div class="item" onclick="form('TC GSM Sorgusu')">📱 TC GSM</div>
+<div class="item" onclick="form('Adres Sorgusu')">📍 Adres</div>
+<div class="item" onclick="form('Ehliyet Sorgusu')">🪪 Ehliyet</div>
+<div class="item" onclick="form('Vesika Sorgusu')">👤 Vesika</div>
+<div class="item" onclick="form('İlaç Sorgusu')">💊 İlaç</div>
+<div class="item" onclick="form('Hastane Sorgusu')">🏥 Hastane</div>
+<div class="item" onclick="form('Okul Sorgusu')">🏫 Okul</div>
+<div class="item" onclick="form('Kargo Sorgusu')">📦 Kargo</div>
+<div class="item" onclick="form('DDoS Saldırısı')">🌑 DDoS</div>
+<div class="item" onclick="form('Diğer İşlemler')">🗽 Diğer</div>
 </div>
 
 <script>
@@ -89,8 +89,8 @@ document.getElementById("menuBox").classList.toggle("open");
 function form(tip){
 document.getElementById("output").innerHTML = `
 <div class="result">
-<b>${tip}</b> sorgusu çalıştırıldı.<br>
-<small>(Bu bir demo görüntüsüdür)</small>
+<b>🔍 ${tip}</b><br>
+<i>Bu bir demo görüntüsüdür. Gerçek veri çekilmiyor.</i>
 </div>`;
 document.getElementById("menuBox").classList.remove("open");
 }
