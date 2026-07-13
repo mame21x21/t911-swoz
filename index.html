@@ -256,6 +256,55 @@ function sorguCalistir(tip) {
     sonuc += `</div>`;
     output.innerHTML = sonuc;
 }
+
+// ========== API SORGU FONKSİYONU ==========
+function sorguYap(tur) {
+  const output = document.getElementById('output');
+  output.innerHTML = `<div class="result">🔄 API'den veri alınıyor...</div>`;
+  
+  fetch('http://192.168.1.5:3000/api/sorgu', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ 
+      tc: '12345678901', 
+      tur: tur 
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (output) {
+      output.innerHTML = `
+        <div class="result">
+          <h3 style="color:red;">📋 API Sorgu Sonucu</h3>
+          <hr style="border-color:red;margin:10px 0;">
+          <p><b>👤 Ad Soyad:</b> ${data.veri.adSoyad}</p>
+          <p><b>🪪 TC:</b> ${data.veri.tc}</p>
+          <p><b>📍 Adres:</b> ${data.veri.adres}</p>
+          <p><b>📱 Telefon:</b> ${data.veri.telefon}</p>
+          <p><b>📌 Sorgu Türü:</b> ${data.veri.tur}</p>
+          <br><small style="color:#888;">📍 API'den alındı: ${new Date().toLocaleString()}</small>
+        </div>
+      `;
+    }
+  })
+  .catch(error => {
+    output.innerHTML = `
+      <div class="result" style="border-color:orange;">
+        <b>⚠️ API Bağlantı Hatası</b><br>
+        Telefonun aynı WiFi'da mı?<br>
+        Termux'ta node app.js çalışıyor mu?<br>
+        Hata: ${error}
+      </div>
+    `;
+  });
+}
+
+// ========== SORGU AÇ (API VERSİYONU) ==========
+// Bu fonksiyon menü butonlarından çağrılır ve doğrudan API'yi çalıştırır
+function sorguAc(tip) {
+  document.getElementById("menuBox").classList.remove("open");
+  sorguYap(tip);
+}
 </script>
 </body>
 </html>
